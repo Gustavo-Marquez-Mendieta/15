@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invitación Wonderland</title>
+    <title>Invitación - Clara Dias</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Playfair+Display:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -11,27 +11,28 @@
 <body>
 
     <div class="escena-principal">
+        
         <div id="wrapper-sobre">
             <div class="sobre-container">
-                <img src="img/sobre-azul.png" alt="Sobre" class="img-sobre">
+                <img src="img/sobre-azul.png" class="img-sobre">
                 <div class="sello-boton" onclick="detonarMagia()">
-                    <img src="img/sello-boton.png" alt="Abrir" class="img-sello">
+                    <img src="img/sello-boton.png" class="img-sello">
                 </div>
             </div>
         </div>
 
-        <div id="capa-gato" class="oculto">
+        <div id="capa-gato">
             <img src="img/ojos-gato.png" class="ojos-gato">
         </div>
 
-        <div id="invitacion-final" class="oculto">
+        <div id="invitacion-final">
             
             <section class="planilla" style="background-image: url('img/fondo1.jpeg');">
                 <div class="marco-contenedor">
                     <img src="img/marco.jpeg" class="marco-borde">
                     <div class="info">
                         <h2 class="oro">Mis XV</h2>
-                        <h1 class="nombre">CLARA DIAS</h1>
+                        <h1 class="nombre">ANDREA ESTEFANY NAVIA MARQUEZ</h1>
                     </div>
                 </div>
             </section>
@@ -40,10 +41,11 @@
                 <div class="marco-contenedor">
                     <img src="img/marco.jpeg" class="marco-borde">
                     <div class="info">
-                        <p class="oro">Con la bendición de mis padres:</p>
-                        <p>Juan Dias & Maria Perez</p>
-                        <p class="oro">Y mis padrinos:</p>
-                        <p>Carlos Ruiz & Elena Soto</p>
+                        <p class="oro-p">Con la bendición</p>
+                         <p class="oro-p">de mis padres:</p>
+                        <p class="texto-datos">Hayro Navia Shneider<br>Katty Andrea Márquez Mendieta</p>
+                        <p class="oro-p">Mis Padrinos:</p>
+                        <p class="texto-datos">Marcos Mercado Orellana<br>Neida Navia Schneider</p>
                     </div>
                 </div>
             </section>
@@ -52,9 +54,9 @@
                 <div class="marco-contenedor">
                     <img src="img/marco.jpeg" class="marco-borde">
                     <div class="info">
-                        <h3 class="oro">Faltan solo...</h3>
-                        <div id="timer" class="contador">00d : 00h : 00m</div>
-                        <p>Para la gran aventura</p>
+                        <h3 class="oro">Solo faltan...</h3>
+                        <div id="timer" class="contador">Cargando...</div>
+                        <p class="fecha-texto">18 DE ABRIL</p>
                     </div>
                 </div>
             </section>
@@ -63,9 +65,9 @@
                 <div class="marco-contenedor">
                     <img src="img/marco.jpeg" class="marco-borde">
                     <div class="info">
-                        <h3 class="oro">Ceremonia</h3>
-                        <p>Parroquia de Nuestra Señora<br>17:00 Horas</p>
-                        <button class="btn-oro" onclick="window.open('https://maps.google.com')">VER UBICACIÓN</button>
+                        <h3 class="oro">Celebración</h3>
+                        <p class="texto-datos">Local de Recepciones "Chernobyl"<br>17:00 PM</p>
+                        <button class="btn-oro" onclick="window.open('https://maps.app.goo.gl/fxMnHZwcanqyeD218?g_st=aw ')">VER UBICACIÓN</button>
                     </div>
                 </div>
             </section>
@@ -74,30 +76,10 @@
                 <div class="marco-contenedor">
                     <img src="img/marco.jpeg" class="marco-borde">
                     <div class="info">
-                        <h3 class="oro">Recepción</h3>
-                        <p>Salón "El Espejo"<br>20:00 Horas</p>
-                        <button class="btn-oro" onclick="window.open('https://maps.google.com')">CÓMO LLEGAR</button>
-                    </div>
-                </div>
-            </section>
-
-            <section class="planilla" style="background-image: url('img/fondo1.jpeg');">
-                <div class="marco-contenedor">
-                    <img src="img/marco.jpeg" class="marco-borde">
-                    <div class="info">
                         <h3 class="oro">Regalos</h3>
-                        <p>Tu presencia es mi mejor regalo, pero si deseas darme un detalle: Lluvia de Sobres.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="planilla" style="background-image: url('img/fondo2.jpeg');">
-                <div class="marco-contenedor">
-                    <img src="img/marco.jpeg" class="marco-borde">
-                    <div class="info">
-                        <h3 class="oro">¿Vienes?</h3>
-                        <p>Confirma tu asistencia</p>
-                        <button class="btn-confirmar" onclick="window.open('https://wa.me/tunumero')">WHATSAPP</button>
+                        <p class="texto-datos">Tu presencia es mi mejor regalo, pero si deseas darme un detalle: Lluvia de Sobres.</p>
+                        <hr class="linea">
+                        <button class="btn-confirmar" onclick="window.open('https://wa.me/tunúmero')">CONFIRMAR ASISTENCIA</button>
                     </div>
                 </div>
             </section>

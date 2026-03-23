@@ -3,108 +3,137 @@ body, html {
     width: 100%; height: 100%;
     background: #000;
     font-family: 'Playfair Display', serif;
-    overflow: hidden; /* Importante: Bloquea el scroll al inicio */
-}
-
-/* Contenedor universal centrado */
-.escena-principal {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     overflow: hidden;
 }
 
-/* FASE 1: EL SOBRE (Centrado total) */
+.escena-principal {
+    position: relative; width: 100%; height: 100vh;
+    display: flex; justify-content: center; align-items: center;
+}
+
+/* SOBRE CENTRADO */
 #wrapper-sobre {
-    position: absolute;
-    z-index: 50;
-    width: 90%;
-    max-width: 350px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    position: absolute; z-index: 50;
+    width: 85%; max-width: 320px;
+    display: flex; justify-content: center;
 }
-
-.sobre-container {
-    position: relative;
-    width: 100%;
-}
-
-.img-sobre { width: 100%; height: auto; display: block; }
-
-.sello-boton {
-    position: absolute;
-    top: 55%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80px;
-    cursor: pointer;
-}
+.img-sobre { width: 100%; height: auto; }
+.sello-boton { position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%); width: 70px; cursor: pointer; }
 .img-sello { width: 100%; }
 
-/* FASE 2: EL GATO (Capa superior negra) */
+/* GATO */
 #capa-gato {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #000;
-    z-index: 100; /* Por encima de todo */
-    display: none; /* Se activa con JS */
-    justify-content: center;
-    align-items: center;
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: #000; z-index: 100; display: none; justify-content: center; align-items: center;
 }
-.ojos-gato { width: 80%; max-width: 400px; }
+.ojos-gato { width: 75%; max-width: 350px; filter: drop-shadow(0 0 15px #00ffff); }
 
-/* FASE 3: INVITACIÓN SCROLL */
+/* SCROLL */
 #invitacion-final {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 150;
-    display: none;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-    background: #000;
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: 150; display: none; overflow-y: scroll; scroll-snap-type: y mandatory;
 }
-
 .planilla {
-    width: 100%;
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-    scroll-snap-align: start;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%; height: 100vh; background-size: cover; background-position: center;
+    scroll-snap-align: start; display: flex; justify-content: center; align-items: center;
 }
 
+/* --- MEJORAS DE CENTRADO Y MARCO --- */
 .marco-contenedor {
-    position: relative;
-    width: 85%;
-    height: 80%;
-    max-width: 350px;
+    position: relative; 
+    width: 90%; 
+    height: 80%; 
+    max-width: 340px;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.marco-borde { 
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    z-index: 1; 
+    pointer-events: none;
+    object-fit: fill; /* Mantiene la forma del marco */
+    
+    /* TRUCO: Quita el fondo negro/oscuro del JPEG del marco */
+    mix-blend-mode: screen; 
+}
+
+.info { 
+    position: relative; 
+    z-index: 5; 
+    text-align: center; 
+    color: white; 
+    
+    /* ZONA SEGURA: Padding interno para que el texto no toque los bordes del marco */
+    padding: 0 45px; 
+    width: 100%;
+    box-sizing: border-box;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.marco-borde {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
+/* --- AJUSTE DE TEXTOS --- */
+.oro { 
+    color: #d4af37; 
+    font-family: 'Cinzel Decorative'; 
+    font-size: 1.3rem; 
+    margin-bottom: 5px; 
 }
 
-.info {
-    position: relative;
-    z-index: 5;
-    text-align: center;
-    color: white;
-    padding: 20px;
+.oro-p { 
+    color: #d4af37; 
+    font-family: 'Cinzel Decorative'; 
+    font-size: 0.8rem; 
+    margin-top: 10px; 
+    margin-bottom: 5px; 
 }
 
-.oculto { display: none; opacity: 0; }
+.nombre { 
+    font-size: 22px; /* Un poco más pequeño para evitar desbordes */
+    letter-spacing: 0.01px; 
+    line-height: 1.5;
+}
+
+.texto-datos { 
+    font-size: 0.85rem; 
+    line-height: 1.4; 
+    margin: 5px 0; 
+}
+
+.contador { 
+    font-size: 1.1rem; 
+    color: #d4af37; 
+    font-weight: bold; 
+    margin: 10px 0; 
+    border: 1px solid #d4af37; 
+    padding: 8px; 
+    width: 90%; /* Ajustado al ancho de .info */
+}
+
+.btn-oro, .btn-confirmar {
+    background: rgba(0,0,0,0.6); 
+    border: 1px solid #d4af37; 
+    color: #d4af37;
+    padding: 10px; 
+    width: 90%; /* Botón más estilizado */
+    font-weight: bold; 
+    cursor: pointer; 
+    margin-top: 10px;
+    font-size: 0.8rem;
+}
+
+.btn-confirmar { background: #d4af37; color: black; }
+
+.linea { 
+    border: 0; 
+    height: 1px; 
+    background: #d4af37; 
+    margin: 10px 0; 
+    opacity: 0.5; 
+    width: 80%;
+}
