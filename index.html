@@ -5,93 +5,391 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invitación - Andrea Navia</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Playfair+Display:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Great+Vibes&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body>
 
-    <audio id="musica" loop>
-        <source src="img/cancion.mp4" type="audio/mpeg">
-    </audio>
+<audio id="musica" loop>
+    <source src="img/cancion.mp4" type="audio/mpeg">
+</audio>
 
-    <div class="escena-principal">
-        
-        <div id="wrapper-sobre">
-            <div class="sobre-container">
-                <img src="img/sobre-azul.png" class="img-sobre">
-                <div class="sello-boton" onclick="detonarMagia()">
-                    <img src="img/sello-boton.png" class="img-sello">
-                </div>
+<div class="escena-principal">
+
+    <div id="wrapper-sobre">
+        <div class="sobre-container">
+            <img src="img/sobre-azul.png" class="img-sobre">
+            <div class="sello-boton" onclick="detonarMagia()">
+                <img src="img/sello-boton.png" class="img-sello">
             </div>
-        </div>
-
-        <div id="capa-gato">
-            <img src="img/ojos-gato.png" class="ojos-gato">
-        </div>
-
-        <div id="invitacion-final">
-            <div id="particulas-container"></div>
-            
-            <section class="planilla" style="background-image: url('img/fondo1.jpeg');">
-                <div class="marco-contenedor" style="background: url('img/quinse.jpeg') center/cover;">
-                    <img src="img/marco.jpeg" class="marco-borde">
-                    <div class="info">
-                        <h2 class="oro">Mis XV</h2>
-                        <h1 class="nombre">ANDREA ESTEFANY NAVIA MARQUEZ</h1>
-                    </div>
-                </div>
-            </section>
-
-            <section class="planilla" style="background-image: url('img/fondo2.jpeg');">
-                <div class="marco-contenedor">
-                    <img src="img/marco.jpeg" class="marco-borde">
-                    <div class="info">
-                        <p class="oro-p">Con la bendición</p>
-                        <p class="oro-p">de mis padres:</p>
-                        <p class="texto-datos">Hayro Navia Shneider<br>Katty Andrea Márquez Mendieta</p>
-                        <p class="oro-p">Mis Padrinos:</p>
-                        <p class="texto-datos">Marcos Mercado Orellana<br>Neida Navia Schneider</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="planilla" style="background-image: url('img/fondo3.jpeg');">
-                <div class="marco-contenedor">
-                    <img src="img/marco.jpeg" class="marco-borde">
-                    <div class="info">
-                        <h3 class="oro">Solo faltan...</h3>
-                        <div id="timer" class="contador">Cargando...</div>
-                        <p class="fecha-texto">18 DE ABRIL</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="planilla" style="background-image: url('img/fondo4.jpeg');">
-                <div class="marco-contenedor">
-                    <img src="img/marco.jpeg" class="marco-borde">
-                    <div class="info">
-                        <h3 class="oro">Celebración</h3>
-                        <p class="texto-datos">Local de Recepciones "Chernobyl"<br>17:00 PM</p>
-                        <button class="btn-oro" onclick="window.open('https://maps.app.goo.gl/fxMnHZwcanqyeD218?g_st=aw ')">VER UBICACIÓN</button>
-                    </div>
-                </div>
-            </section>
-
-            <section class="planilla" style="background-image: url('img/fondo5.jpeg');">
-                <div class="marco-contenedor">
-                    <img src="img/marco.jpeg" class="marco-borde">
-                    <div class="info">
-                        <h3 class="oro">Regalos</h3>
-                        <p class="texto-datos">Tu presencia es mi mejor regalo, pero si deseas darme un detalle: Lluvia de Sobres.</p>
-                        <hr class="linea">
-                        <button class="btn-confirmar" onclick="window.open('https://wa.me/tunúmero')">CONFIRMAR ASISTENCIA</button>
-                    </div>
-                </div>
-            </section>
-
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <div id="capa-gato">
+        <img src="img/ojos-gato.png" class="ojos-gato">
+    </div>
+
+    <div id="invitacion-final">
+        <div id="particulas-container"></div>
+
+        <!-- ════════════════════════════════
+             S1 · PORTADA — grande y llena
+        ════════════════════════════════ -->
+        <section class="planilla" style="background-image:url('img/fondo1.jpeg');">
+            <canvas class="brillo-canvas"></canvas>
+            <div class="portada-wrapper anim-entrada">
+
+                <!-- Banda superior -->
+                <div class="portada-banda-top">
+                    <span class="pb-linea"></span>
+                    <span class="pb-texto">✦ UNA NOCHE MÁGICA ✦</span>
+                    <span class="pb-linea"></span>
+                </div>
+
+                <div class="portada-luna-grande">☽ ✦ ☾</div>
+
+                <p class="portada-invita">Te invita a celebrar</p>
+
+                <!-- Nombre grande -->
+                <div class="portada-nombre-bloque">
+                    <p class="portada-mis-xv">Mis XV Años</p>
+                    <h1 class="portada-nombre">ANDREA<br>ESTEFANY<br>NAVIA MÁRQUEZ</h1>
+                </div>
+
+                <!-- Separador mariposas -->
+                <div class="portada-mariposas-row">
+                    <span class="pb-linea-corta"></span>
+                    <span class="pm-icon">🦋</span>
+                    <span class="pm-icon">🦋</span>
+                    <span class="pm-icon">🦋</span>
+                    <span class="pb-linea-corta"></span>
+                </div>
+
+                <!-- Cita fantástica -->
+                <p class="portada-cita">
+                    "Soy el hada de las quince ilusiones,<br>
+                    el mañana depende de mí."
+                </p>
+
+                <!-- Fecha destacada -->
+                <div class="portada-fecha-bloque">
+                    <span class="portada-fecha-num">18</span>
+                    <div class="portada-fecha-texto">
+                        <span>ABRIL</span>
+                        <span>2026</span>
+                    </div>
+                </div>
+
+                <!-- Banda inferior -->
+                <div class="portada-banda-bot">
+                    <span class="pb-linea"></span>
+                    <span class="pb-texto">✦ ✦ ✦</span>
+                    <span class="pb-linea"></span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════
+             S2 · FOTO QUINCEAÑERA
+        ════════════════════════════════ -->
+        <section class="planilla seccion-foto" style="background-image:url('img/fondo2.jpeg');">
+            <canvas class="brillo-canvas"></canvas>
+            <div class="foto-contenedor-completo anim-entrada">
+                <div class="foto-linea-deco">
+                    <span class="foto-linea-izq"></span>
+                    <span class="foto-rombo">◆</span>
+                    <span class="foto-linea-der"></span>
+                </div>
+                <p class="foto-anio-texto">~ La protagonista de esta noche ~</p>
+                <div class="foto-marco-dorado">
+                    <img src="img/quinseañera.png" alt="Andrea" class="foto-quinceañera">
+                    <svg class="foto-esquina tl" viewBox="0 0 40 40"><path d="M0,40 L0,0 L40,0" stroke="#c084fc" stroke-width="2.5" fill="none"/><circle cx="0" cy="0" r="4" fill="#c084fc"/></svg>
+                    <svg class="foto-esquina tr" viewBox="0 0 40 40"><path d="M40,40 L40,0 L0,0" stroke="#c084fc" stroke-width="2.5" fill="none"/><circle cx="40" cy="0" r="4" fill="#c084fc"/></svg>
+                    <svg class="foto-esquina bl" viewBox="0 0 40 40"><path d="M0,0 L0,40 L40,40" stroke="#c084fc" stroke-width="2.5" fill="none"/><circle cx="0" cy="40" r="4" fill="#c084fc"/></svg>
+                    <svg class="foto-esquina br" viewBox="0 0 40 40"><path d="M40,0 L40,40 L0,40" stroke="#c084fc" stroke-width="2.5" fill="none"/><circle cx="40" cy="40" r="4" fill="#c084fc"/></svg>
+                </div>
+                <p class="foto-nombre-grande">Andrea</p>
+                <p class="foto-nombre-completo">ESTEFANY NAVIA MÁRQUEZ</p>
+                <div class="foto-linea-deco">
+                    <span class="foto-linea-izq"></span>
+                    <span class="foto-rombo">◆</span>
+                    <span class="foto-linea-der"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════
+             S3 · POEMA
+        ════════════════════════════════ -->
+        <section class="planilla seccion-poema" style="background-image:url('img/fondo3.jpeg');">
+            <canvas class="brillo-canvas"></canvas>
+            <div class="poema-wrapper anim-entrada">
+                <div class="poema-titulo-row">
+                    <span class="poema-luna">☽</span>
+                    <p class="poema-titulo-texto">Palabras de mi corazón</p>
+                    <span class="poema-luna">☾</span>
+                </div>
+                <div class="poema-ornamento-top">✦ ✦ ✦</div>
+                <p class="poema-texto">
+                    El cielo se vistió con mis sueños,<br>
+                    el sol hoy nació para mí,<br>
+                    la luna se mudó a mi sonrisa<br>
+                    y a mi pecho un nuevo latir.
+                </p>
+                <div class="poema-separador"></div>
+                <p class="poema-texto">
+                    No habrá conjuro en la tierra<br>
+                    que evite que mis ojos de niña<br>
+                    tengan ya mirar de mujer.
+                </p>
+                <div class="poema-separador"></div>
+                <p class="poema-texto">
+                    Soy el hada de las quince ilusiones,<br>
+                    el mañana depende de mí.<br>
+                    Mi ansiedad ya desplegó sus alas<br>
+                    y el mundo me empuja a vivir.
+                </p>
+                <div class="poema-ornamento-bottom">✦ ✦ ✦</div>
+                <p class="poema-firma">— Andrea, con amor —</p>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════
+             S4 · PADRES Y PADRINOS
+        ════════════════════════════════ -->
+        <section class="planilla info-section" style="background-image:url('img/fondo4.jpeg');">
+            <canvas class="brillo-canvas"></canvas>
+            <div class="fantasia-card anim-entrada">
+                <svg class="fc-corner tl" viewBox="0 0 50 50"><path d="M0,50 L0,0 L50,0" stroke="#c084fc" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/><circle cx="0" cy="0" r="3" fill="#c084fc"/></svg>
+                <svg class="fc-corner tr" viewBox="0 0 50 50"><path d="M50,50 L50,0 L0,0" stroke="#c084fc" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/><circle cx="50" cy="0" r="3" fill="#c084fc"/></svg>
+                <svg class="fc-corner bl" viewBox="0 0 50 50"><path d="M0,0 L0,50 L50,50" stroke="#c084fc" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/><circle cx="0" cy="50" r="3" fill="#c084fc"/></svg>
+                <svg class="fc-corner br" viewBox="0 0 50 50"><path d="M50,0 L50,50 L0,50" stroke="#c084fc" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/><circle cx="50" cy="50" r="3" fill="#c084fc"/></svg>
+
+                <div class="fc-header">
+                    <span class="fc-mariposa">🦋</span>
+                    <h2 class="fc-titulo">Bendiciones</h2>
+                    <span class="fc-mariposa">🦋</span>
+                </div>
+                <div class="fc-linea"></div>
+
+                <!-- Frase -->
+                <p class="fc-frase">
+                    "Con la bendición de Dios y el amor<br>
+                    de mi familia, me siento muy feliz<br>
+                    de llegar a esta etapa de mi vida."
+                </p>
+                <div class="fc-linea fc-linea-corta"></div>
+
+                <p class="fc-label">✦ Con el amor de mis padres ✦</p>
+                <div class="fc-personas-bloque">
+                    <span class="fc-icono-persona">👑</span>
+                    <p class="fc-nombres">Hayro Navia Schneider <br>Katty Andrea Márquez Mendieta</p>
+                </div>
+
+                <div class="fc-linea fc-linea-corta"></div>
+
+                <p class="fc-label">✦ Mis Padrinos ✦</p>
+                <div class="fc-personas-bloque">
+                    <span class="fc-icono-persona">🌙</span>
+                    <p class="fc-nombres">Marcos Mercado Orellana<br>Neida Navia Schneider </p>
+                </div>
+
+                <div class="fc-linea"></div>
+                <div class="fc-footer-deco">🦋 · ✦ · 🦋</div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════
+             S5 · CONTADOR
+        ════════════════════════════════ -->
+        <section class="planilla info-section" style="background-image:url('img/fondo1.jpeg');">
+            <canvas class="brillo-canvas"></canvas>
+            <div class="fantasia-card anim-entrada">
+                <svg class="fc-corner tl" viewBox="0 0 50 50"><path d="M0,50 L0,0 L50,0" stroke="#c084fc" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/><circle cx="0" cy="0" r="3" fill="#c084fc"/></svg>
+                <svg class="fc-corner tr" viewBox="0 0 50 50"><path d="M50,50 L50,0 L0,0" stroke="#c084fc" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/><circle cx="50" cy="0" r="3" fill="#c084fc"/></svg>
+                <svg class="fc-corner bl" viewBox="0 0 50 50"><path d="M0,0 L0,50 L50,50" stroke="#c084fc" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/><circle cx="0" cy="50" r="3" fill="#c084fc"/></svg>
+                <svg class="fc-corner br" viewBox="0 0 50 50"><path d="M50,0 L50,50 L0,50" stroke="#c084fc" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/><circle cx="50" cy="50" r="3" fill="#c084fc"/></svg>
+
+                <div class="fc-header">
+                    <span class="fc-luna-small">☽</span>
+                    <h2 class="fc-titulo titulo-pulso">Ya falta poco...</h2>
+                    <span class="fc-luna-small">☾</span>
+                </div>
+                <div class="fc-linea"></div>
+
+                <!-- Frase motivadora -->
+                <p class="fc-frase">
+                    "El tiempo del hada se acerca...<br>
+                    pronto la magia comenzará."
+                </p>
+                <div class="fc-linea fc-linea-corta"></div>
+
+                <div id="timer" class="contador">
+                    <div class="contador-bloque"><span id="c-dias">00</span><label>DÍAS</label></div>
+                    <div class="contador-sep">:</div>
+                    <div class="contador-bloque"><span id="c-horas">00</span><label>HRS</label></div>
+                    <div class="contador-sep">:</div>
+                    <div class="contador-bloque"><span id="c-min">00</span><label>MIN</label></div>
+                    <div class="contador-sep">:</div>
+                    <div class="contador-bloque"><span id="c-seg">00</span><label>SEG</label></div>
+                </div>
+
+                <div class="fc-linea"></div>
+                <p class="fecha-texto fecha-destello">✨ 18 DE ABRIL · 2026 ✨</p>
+
+                <!-- Nota debajo de la fecha -->
+                <p class="fc-nota">¡Aparta esa fecha en tu corazón!</p>
+                <div class="fc-footer-deco">🌙 · ✦ · 🌙</div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════
+             S6 · CELEBRACIÓN
+        ════════════════════════════════ -->
+        <section class="planilla info-section" style="background-image:url('img/fondo2.jpeg');">
+            <canvas class="brillo-canvas"></canvas>
+            <div class="fantasia-card anim-entrada">
+                <svg class="fc-corner tl" viewBox="0 0 50 50"><path d="M0,50 L0,0 L50,0" stroke="#c084fc" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/><circle cx="0" cy="0" r="3" fill="#c084fc"/></svg>
+                <svg class="fc-corner tr" viewBox="0 0 50 50"><path d="M50,50 L50,0 L0,0" stroke="#c084fc" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/><circle cx="50" cy="0" r="3" fill="#c084fc"/></svg>
+                <svg class="fc-corner bl" viewBox="0 0 50 50"><path d="M0,0 L0,50 L50,50" stroke="#c084fc" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/><circle cx="0" cy="50" r="3" fill="#c084fc"/></svg>
+                <svg class="fc-corner br" viewBox="0 0 50 50"><path d="M50,0 L50,50 L0,50" stroke="#c084fc" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/><circle cx="50" cy="50" r="3" fill="#c084fc"/></svg>
+
+                <div class="fc-header">
+                    <span class="fc-mariposa">🦋</span>
+                    <h2 class="fc-titulo titulo-pulso">La Celebración</h2>
+                    <span class="fc-mariposa">🦋</span>
+                </div>
+                <div class="fc-linea"></div>
+
+                <!-- Frase -->
+                <p class="fc-frase">
+                    "Ven a ser parte de este cuento<br>
+                    de magia y quince ilusiones."
+                </p>
+                <div class="fc-linea fc-linea-corta"></div>
+
+                <div class="fc-lugar-icon">🏛️</div>
+                <p class="fc-label">✦ Lugar ✦</p>
+                <p class="fc-lugar-nombre">"Chernobyl"</p>
+                <p class="fc-sublabel">Local de Recepciones</p>
+
+                <div class="fc-linea fc-linea-corta"></div>
+
+                <div class="fc-detalles-row">
+                    <div class="fc-detalle-item">
+                        <span class="fc-detalle-icon">📅</span>
+                        <span class="fc-detalle-txt">18 ABRIL<br>2026</span>
+                    </div>
+                    <div class="fc-detalle-sep">·</div>
+                    <div class="fc-detalle-item">
+                        <span class="fc-detalle-icon">🕔</span>
+                        <span class="fc-detalle-txt">17:00<br>HRS</span>
+                    </div>
+                </div>
+
+                <div class="fc-linea fc-linea-corta"></div>
+                <button class="btn-fantasia btn-shimmer" onclick="window.open('https://maps.app.goo.gl/fxMnHZwcanqyeD218?g_st=aw')">
+                    🌿 VER UBICACIÓN 🌿
+                </button>
+                <div class="fc-footer-deco">🦋 · ✦ · 🦋</div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════
+             S7 · CÓDIGO DE VESTIMENTA
+        ════════════════════════════════ -->
+        <section class="planilla info-section" style="background-image:url('img/fondo3.jpeg');">
+            <canvas class="brillo-canvas"></canvas>
+            <div class="fantasia-card anim-entrada">
+                <svg class="fc-corner tl" viewBox="0 0 50 50"><path d="M0,50 L0,0 L50,0" stroke="#c084fc" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/><circle cx="0" cy="0" r="3" fill="#c084fc"/></svg>
+                <svg class="fc-corner tr" viewBox="0 0 50 50"><path d="M50,50 L50,0 L0,0" stroke="#c084fc" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/><circle cx="50" cy="0" r="3" fill="#c084fc"/></svg>
+                <svg class="fc-corner bl" viewBox="0 0 50 50"><path d="M0,0 L0,50 L50,50" stroke="#c084fc" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/><circle cx="0" cy="50" r="3" fill="#c084fc"/></svg>
+                <svg class="fc-corner br" viewBox="0 0 50 50"><path d="M50,0 L50,50 L0,50" stroke="#c084fc" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/><circle cx="50" cy="50" r="3" fill="#c084fc"/></svg>
+
+                <div class="fc-header">
+                    <span class="fc-mariposa">🧚‍♀️</span>
+                    <h2 class="fc-titulo">Vestimenta</h2>
+                    <span class="fc-mariposa">🧚‍♀️</span>
+                </div>
+                <div class="fc-linea"></div>
+
+                <!-- Frase previa -->
+                <p class="fc-frase">
+                    "Viste tu mejor magia<br>y ven a brillar esta noche."
+                </p>
+                <div class="fc-linea fc-linea-corta"></div>
+
+                <div class="hada-icono-float">🧚‍♀️</div>
+                <div class="vestimenta-badge-fantasia">✦ ELEGANTE ✦</div>
+
+                <div class="fc-linea fc-linea-corta"></div>
+
+                <p class="fc-label">✦ Sugerencia especial ✦</p>
+                <p class="vestimenta-sugerencia-texto">
+                    Amablemente, el color morado<br>únicamente para la quinceañera
+                </p>
+
+                <div class="fc-linea fc-linea-corta"></div>
+                <!-- Colores permitidos pills -->
+                <p class="fc-nota">Paleta sugerida para invitados:</p>
+                <div class="colores-row">
+                    <span class="color-pill" style="background:#1e1b4b;">Azul noche</span>
+                    <span class="color-pill" style="background:#1f2937;">Negro</span>
+                </div>
+
+                <div class="fc-linea"></div>
+                <div class="fc-footer-deco">🧚‍♀️ · ✦ · 🧚‍♀️</div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════
+             S8 · REGALOS
+        ════════════════════════════════ -->
+        <section class="planilla info-section" style="background-image:url('img/fondo4.jpeg');">
+            <canvas class="brillo-canvas"></canvas>
+            <div class="fantasia-card anim-entrada">
+                <svg class="fc-corner tl" viewBox="0 0 50 50"><path d="M0,50 L0,0 L50,0" stroke="#c084fc" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/><circle cx="0" cy="0" r="3" fill="#c084fc"/></svg>
+                <svg class="fc-corner tr" viewBox="0 0 50 50"><path d="M50,50 L50,0 L0,0" stroke="#c084fc" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/><circle cx="50" cy="0" r="3" fill="#c084fc"/></svg>
+                <svg class="fc-corner bl" viewBox="0 0 50 50"><path d="M0,0 L0,50 L50,50" stroke="#c084fc" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/><circle cx="0" cy="50" r="3" fill="#c084fc"/></svg>
+                <svg class="fc-corner br" viewBox="0 0 50 50"><path d="M50,0 L50,50 L0,50" stroke="#c084fc" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/><circle cx="50" cy="50" r="3" fill="#c084fc"/></svg>
+
+                <div class="fc-header">
+                    <span class="fc-luna-small">☽</span>
+                    <h2 class="fc-titulo titulo-pulso">Un Detalle</h2>
+                    <span class="fc-luna-small">☾</span>
+                </div>
+                <div class="fc-linea"></div>
+
+                <!-- Frase -->
+                <p class="fc-frase">
+                    "El mayor regalo eres tú,<br>
+                    tu presencia ilumina<br>
+                    mi noche mágica."
+                </p>
+                <div class="fc-linea fc-linea-corta"></div>
+
+                <div class="fc-lugar-icon">🎁</div>
+                <p class="fc-nombres" style="font-style:italic; font-size:0.83rem;">
+                    Pero si deseas darme un detalle con amor:
+                </p>
+                <p class="lluvia-texto lluvia-anim">💌 Lluvia de Sobres 💌</p>
+
+                <div class="fc-linea fc-linea-corta"></div>
+
+                <!-- Nota de confirmación -->
+                <p class="fc-nota">¡Tu confirmación es muy importante!</p>
+                <button class="btn-fantasia-oro btn-shimmer" onclick="window.open('https://wa.me/tunúmero')">
+                    ✉️ CONFIRMAR ASISTENCIA
+                </button>
+                <p class="fc-nota" style="margin-top:6px;">📲 Confirma por WhatsApp</p>
+                <div class="fc-footer-deco">🌙 · ✦ · 🌙</div>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

@@ -1,7 +1,25 @@
+/* ─────────────────────────────────────────────
+   VARIABLES DE TEMA FANTÁSTICO
+   ─────────────────────────────────────────────*/
+:root {
+    --morado:       #c084fc;
+    --morado-oscuro:#7c3aed;
+    --morado-glow:  rgba(192, 132, 252, 0.55);
+    --lila:         #e9d5ff;
+    --dorado:       #d4af37;
+    --dorado-glow:  rgba(212, 175, 55, 0.6);
+    --blanco-suave: #f5f0ff;
+    --negro-magic:  rgba(10, 0, 25, 0.72);
+}
+
+/* ─────────────────────────────────────────────
+   BASE
+   ─────────────────────────────────────────────*/
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 body, html {
-    margin: 0; padding: 0;
     width: 100%; height: 100%;
-    background: #000;
+    background: #0a0015;
     font-family: 'Playfair Display', serif;
     overflow: hidden;
 }
@@ -11,170 +29,688 @@ body, html {
     display: flex; justify-content: center; align-items: center;
 }
 
-/* SOBRE CENTRADO */
+/* ─────────────────────────────────────────────
+   SOBRE
+   ─────────────────────────────────────────────*/
 #wrapper-sobre {
     position: absolute; z-index: 50;
     width: 85%; max-width: 320px;
     display: flex; justify-content: center;
 }
 .img-sobre { width: 100%; height: auto; }
-.sello-boton { position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%); width: 70px; cursor: pointer; }
+.sello-boton {
+    position: absolute; top: 55%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px; cursor: pointer;
+}
 .img-sello { width: 100%; }
 
-/* GATO */
+/* ─────────────────────────────────────────────
+   GATO
+   ─────────────────────────────────────────────*/
 #capa-gato {
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    background: #000; z-index: 100; display: none; justify-content: center; align-items: center;
+    position: fixed; inset: 0;
+    background: #000; z-index: 100;
+    display: none; justify-content: center; align-items: center;
 }
 .ojos-gato { width: 75%; max-width: 350px; filter: drop-shadow(0 0 15px #00ffff); }
 
-/* SCROLL */
+/* ─────────────────────────────────────────────
+   SCROLL PRINCIPAL
+   ─────────────────────────────────────────────*/
 #invitacion-final {
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    z-index: 150; display: none; overflow-y: scroll; scroll-snap-type: y mandatory;
+    position: fixed; inset: 0;
+    z-index: 150; display: none;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
 }
+
 .planilla {
-    width: 100%; height: 100vh; background-size: cover; background-position: center;
-    scroll-snap-align: start; display: flex; justify-content: center; align-items: center;
+    width: 100%; height: 100vh;
+    background-size: cover; background-position: center;
+    scroll-snap-align: start;
+    display: flex; justify-content: center; align-items: center;
+    position: relative;
 }
 
-/* --- MEJORAS DE CENTRADO Y MARCO --- */
-.marco-contenedor {
-    position: relative; 
-    width: 90%; 
-    height: 80%; 
-    max-width: 340px;
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-}
-
-.marco-borde { 
-    position: absolute; 
-    width: 100%; 
-    height: 100%; 
-    z-index: 1; 
+/* Overlay de niebla mágica */
+.planilla::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(10,0,30,0.45) 0%,
+        rgba(60,0,100,0.18) 50%,
+        rgba(10,0,30,0.55) 100%
+    );
     pointer-events: none;
-    object-fit: fill; 
-    mix-blend-mode: screen; 
 }
 
-.info { 
-    position: relative; 
-    z-index: 5; 
-    text-align: center; 
-    color: white; 
-    
-    /* ZONA SEGURA MEJORADA: 
-       Aumentamos el espacio lateral a 60px para que las letras 
-       no toquen los bordes del marco decorativo */
-    padding: 0 60px; 
-    
-    /* Limitamos el ancho total para asegurar el centrado */
-    width: 100%;
-    max-width: 280px; 
-    
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto; /* Asegura que el bloque esté centrado respecto al marco */
+/* Canvas brillos */
+.brillo-canvas {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    pointer-events: none; z-index: 2;
 }
 
-/* --- AJUSTE DE TEXTOS --- */
-.oro { 
-    color: #d4af37; 
-    font-family: 'Cinzel Decorative'; 
-    font-size: 1.3rem; 
-    margin-bottom: 5px; 
+/* Animación de entrada */
+.anim-entrada {
+    opacity: 0;
+    transform: translateY(28px) scale(0.97);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.anim-entrada.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
 }
 
-.oro-p { 
-    color: #d4af37; 
-    font-family: 'Cinzel Decorative'; 
-    font-size: 0.8rem; 
-    margin-top: 10px; 
-    margin-bottom: 5px; 
-}
-
-.nombre { 
-    font-size: 22px; 
-    letter-spacing: 0.01px; 
-    line-height: 1.5;
-}
-
-.texto-datos { 
-    font-size: 0.82rem; /* Bajamos un pelín el tamaño para que quepa mejor en el centro */
-    line-height: 1.4; 
-    margin: 3px 0; 
-    width: 100%; /* Para que el texto use el área disponible del padding */
-}
-
-.contador { 
-    font-size: 1.1rem; 
-    color: #d4af37; 
-    font-weight: bold; 
-    margin: 10px 0; 
-    border: 1px solid #d4af37; 
-    padding: 8px; 
-    width: 90%; 
-}
-
-.btn-oro, .btn-confirmar {
-    background: rgba(0,0,0,0.6); 
-    border: 1px solid #d4af37; 
-    color: #d4af37;
-    padding: 10px; 
-    width: 90%; 
-    font-weight: bold; 
-    cursor: pointer; 
-    margin-top: 10px;
-    font-size: 0.8rem;
-}
-
-.btn-confirmar { background: #d4af37; color: black; }
-
-.linea { 
-    border: 0; 
-    height: 1px; 
-    background: #d4af37; 
-    margin: 10px 0; 
-    opacity: 0.5; 
-    width: 80%;
-}
-
-/* =========================================
-   NUEVO CÓDIGO: BRILLITOS (CHISPAS)
-   ========================================= */
+/* ─────────────────────────────────────────────
+   PARTÍCULAS GLOBALES
+   ─────────────────────────────────────────────*/
 #particulas-container {
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%;
-    pointer-events: none; 
-    z-index: 160; /* Justo encima del contenido */
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 160;
 }
-
 .chispa {
     position: absolute;
-    width: 3px; 
-    height: 3px;
-    background: white;
-    border-radius: 50%;
-    box-shadow: 0 0 8px #d4af37, 0 0 3px white;
-    opacity: 0;
+    border-radius: 50%; opacity: 0;
     animation: parpadeoYFlote 4s infinite ease-in-out;
 }
-
 @keyframes parpadeoYFlote {
-    0%, 100% { 
-        opacity: 0; 
-        transform: translateY(0) scale(1); 
-    }
-    50% { 
-        opacity: 0.8; 
-        transform: translateY(-40px) scale(1.2); 
-    }
+    0%,100% { opacity: 0; transform: translateY(0) scale(1); }
+    50%      { opacity: 0.9; transform: translateY(-45px) scale(1.3); }
+}
+
+/* ─────────────────────────────────────────────
+   S1 · PORTADA FANTÁSTICA
+   ─────────────────────────────────────────────*/
+.portada-wrapper {
+    position: relative; z-index: 3;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 6px;
+    text-align: center;
+    width: 88%; max-width: 320px;
+    padding: 30px 20px;
+    background: var(--negro-magic);
+    border: 1px solid rgba(192,132,252,0.35);
+    box-shadow:
+        0 0 0 1px rgba(192,132,252,0.1),
+        0 0 40px rgba(120,0,200,0.3),
+        inset 0 0 50px rgba(100,0,180,0.08);
+    backdrop-filter: blur(6px);
+}
+
+.portada-luna {
+    font-size: 2.2rem;
+    color: var(--lila);
+    animation: lunaFlote 4s ease-in-out infinite;
+    text-shadow: 0 0 20px var(--morado-glow), 0 0 40px rgba(192,132,252,0.3);
+    line-height: 1;
+}
+@keyframes lunaFlote {
+    0%,100% { transform: translateY(0) rotate(-5deg); }
+    50%      { transform: translateY(-6px) rotate(5deg); }
+}
+
+.portada-linea-deco {
+    display: flex; align-items: center; gap: 8px; width: 100%;
+}
+.portada-linea-deco span:not(.pd-rombo) {
+    flex: 1; height: 1px;
+    background: linear-gradient(to right, transparent, var(--morado), transparent);
+}
+.pd-rombo {
+    color: var(--morado); font-size: 0.55rem;
+    text-shadow: 0 0 10px var(--morado-glow);
+    animation: brilloCorna 2s ease-in-out infinite alternate;
+}
+
+.portada-mis-xv {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2rem; color: var(--lila);
+    text-shadow: 0 0 20px var(--morado-glow), 0 2px 5px rgba(0,0,0,0.9);
+}
+
+.portada-nombre {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 0.8rem; letter-spacing: 2px;
+    color: #fff; line-height: 1.9;
+    text-shadow: 0 0 15px var(--morado-glow), 0 1px 4px rgba(0,0,0,0.9);
+}
+
+.portada-mariposas {
+    font-size: 1.1rem; letter-spacing: 6px;
+    color: var(--morado);
+    text-shadow: 0 0 12px var(--morado-glow);
+    animation: mariposasPulso 3s ease-in-out infinite alternate;
+}
+@keyframes mariposasPulso {
+    from { text-shadow: 0 0 8px rgba(192,132,252,0.4); }
+    to   { text-shadow: 0 0 20px var(--morado-glow), 0 0 40px rgba(150,0,255,0.4); }
+}
+
+/* ─────────────────────────────────────────────
+   S2 · FOTO QUINCEAÑERA
+   ─────────────────────────────────────────────*/
+.seccion-foto { align-items: center; }
+
+.foto-contenedor-completo {
+    position: relative; z-index: 3;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 8px;
+    width: 88%; max-width: 300px;
+}
+
+.foto-linea-deco {
+    display: flex; align-items: center; width: 100%; gap: 8px;
+}
+.foto-linea-izq {
+    flex: 1; height: 1px;
+    background: linear-gradient(to right, transparent, var(--morado));
+}
+.foto-linea-der {
+    flex: 1; height: 1px;
+    background: linear-gradient(to left, transparent, var(--morado));
+}
+.foto-rombo {
+    color: var(--morado); font-size: 0.55rem;
+    text-shadow: 0 0 8px var(--morado-glow);
+}
+
+.foto-anio-texto {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.3rem; color: var(--lila); letter-spacing: 2px;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.9), 0 0 12px var(--morado-glow);
+}
+
+.foto-marco-dorado {
+    position: relative; width: 100%;
+    max-height: 58vh;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid var(--morado);
+    box-shadow:
+        0 0 0 6px rgba(192,132,252,0.10),
+        0 0 30px var(--morado-glow),
+        0 0 60px rgba(100,0,200,0.3);
+    overflow: hidden; background: transparent;
+}
+.foto-quinceañera {
+    width: 100%;
+    height: auto;
+    max-height: 58vh;
+    object-fit: contain;
+    object-position: center center;
+    display: block;
+}
+.foto-esquina {
+    position: absolute; width: 36px; height: 36px; pointer-events: none;
+    filter: drop-shadow(0 0 5px var(--morado-glow));
+}
+.foto-esquina.tl { top:-1px; left:-1px; }
+.foto-esquina.tr { top:-1px; right:-1px; }
+.foto-esquina.bl { bottom:-1px; left:-1px; }
+.foto-esquina.br { bottom:-1px; right:-1px; }
+
+.foto-nombre-grande {
+    font-family: 'Great Vibes', cursive; font-size: 2.6rem;
+    color: var(--morado); margin: 0; line-height: 1;
+    text-shadow: 0 0 20px var(--morado-glow), 0 2px 6px rgba(0,0,0,0.9);
+}
+.foto-nombre-completo {
+    font-family: 'Cinzel Decorative', cursive; font-size: 0.5rem;
+    color: var(--lila); letter-spacing: 3px; text-transform: uppercase;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+}
+
+/* ─────────────────────────────────────────────
+   S3 · POEMA
+   ─────────────────────────────────────────────*/
+.seccion-poema { align-items: center; }
+
+.poema-wrapper {
+    position: relative; z-index: 3;
+    width: 88%; max-width: 340px;
+    text-align: center;
+    padding: 28px 22px;
+    background: var(--negro-magic);
+    border: 1px solid rgba(192,132,252,0.3);
+    box-shadow: 0 0 35px rgba(100,0,200,0.25), inset 0 0 30px rgba(120,0,200,0.06);
+    backdrop-filter: blur(5px);
+}
+.poema-ornamento-top, .poema-ornamento-bottom {
+    color: var(--morado); font-size: 0.9rem; letter-spacing: 8px;
+    margin-bottom: 14px;
+    text-shadow: 0 0 12px var(--morado-glow);
+    animation: brilloCorna 2.5s ease-in-out infinite alternate;
+}
+.poema-ornamento-bottom { margin-top: 14px; margin-bottom: 0; }
+.poema-texto {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 0.87rem; line-height: 1.85;
+    color: var(--blanco-suave); margin: 0;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+}
+.poema-separador {
+    width: 40%; height: 1px; margin: 12px auto;
+    background: linear-gradient(to right, transparent, var(--morado), transparent);
+}
+
+/* ─────────────────────────────────────────────
+   FANTASIA-CARD  (secciones info S4–S8)
+   ─────────────────────────────────────────────*/
+.fantasia-card {
+    position: relative; z-index: 3;
+    width: 88%; max-width: 320px;
+    padding: 28px 24px;
+    background: var(--negro-magic);
+    border: 1px solid rgba(192,132,252,0.28);
+    box-shadow:
+        0 0 0 1px rgba(192,132,252,0.08),
+        0 0 40px rgba(100,0,200,0.28),
+        inset 0 0 50px rgba(80,0,160,0.07);
+    backdrop-filter: blur(7px);
+    text-align: center;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 10px;
+}
+
+/* Esquinas SVG */
+.fc-corner {
+    position: absolute; width: 44px; height: 44px; pointer-events: none;
+    filter: drop-shadow(0 0 6px var(--morado-glow));
+    animation: cornerGlow 3s ease-in-out infinite alternate;
+}
+.fc-corner.tl { top:-2px; left:-2px; }
+.fc-corner.tr { top:-2px; right:-2px; }
+.fc-corner.bl { bottom:-2px; left:-2px; }
+.fc-corner.br { bottom:-2px; right:-2px; }
+
+@keyframes cornerGlow {
+    from { filter: drop-shadow(0 0 3px rgba(192,132,252,0.5)); }
+    to   { filter: drop-shadow(0 0 10px rgba(192,132,252,1)) drop-shadow(0 0 20px rgba(150,0,255,0.5)); }
+}
+
+/* Header de card */
+.fc-header {
+    display: flex; align-items: center; gap: 10px;
+    width: 100%; justify-content: center;
+}
+.fc-titulo {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.9rem; color: var(--lila);
+    text-shadow: 0 0 18px var(--morado-glow), 0 2px 5px rgba(0,0,0,0.9);
+    line-height: 1;
+}
+.fc-mariposa  { font-size: 1rem; animation: mariposasPulso 3s ease-in-out infinite alternate; }
+.fc-luna-small { font-size: 1.1rem; color: var(--lila); text-shadow: 0 0 12px var(--morado-glow); }
+
+/* Líneas internas */
+.fc-linea {
+    width: 90%; height: 1px;
+    background: linear-gradient(to right, transparent, var(--morado), transparent);
+    opacity: 0.6;
+}
+.fc-linea-corta { width: 50%; }
+
+/* Textos */
+.fc-label {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 0.6rem; letter-spacing: 2px;
+    color: var(--morado); text-transform: uppercase;
+    text-shadow: 0 0 10px var(--morado-glow);
+    animation: brilloCorna 2.5s ease-in-out infinite alternate;
+}
+.fc-nombres {
+    font-size: 0.84rem; line-height: 1.6;
+    color: var(--blanco-suave);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+}
+.fc-lugar-icon {
+    font-size: 1.8rem;
+    animation: iconoRing 3s ease-in-out infinite;
+    position: relative;
+}
+.fc-lugar-nombre {
+    font-family: 'Great Vibes', cursive; font-size: 1.5rem;
+    color: var(--morado);
+    text-shadow: 0 0 15px var(--morado-glow), 0 2px 4px rgba(0,0,0,0.9);
+}
+.fc-footer-deco {
+    color: var(--morado); font-size: 0.6rem; letter-spacing: 6px;
+    text-shadow: 0 0 10px var(--morado-glow);
+    animation: brilloCorna 2.5s ease-in-out infinite alternate;
+}
+
+/* ─────────────────────────────────────────────
+   CONTADOR
+   ─────────────────────────────────────────────*/
+#timer.contador {
+    display: flex; gap: 5px;
+    align-items: center; justify-content: center;
+    background: rgba(100,0,200,0.18);
+    border: 1px solid rgba(192,132,252,0.4);
+    padding: 10px 8px; width: 95%;
+    box-shadow: 0 0 20px rgba(120,0,220,0.3);
+}
+.contador-bloque { display: flex; flex-direction: column; align-items: center; }
+.contador-bloque span {
+    font-size: 1.45rem; font-weight: 700;
+    color: var(--lila); line-height: 1;
+    font-family: 'Cinzel Decorative', cursive;
+    text-shadow: 0 0 12px var(--morado-glow);
+}
+.contador-bloque label {
+    font-size: 0.42rem; color: var(--morado);
+    letter-spacing: 1px; margin-top: 3px;
+    font-family: 'Cinzel Decorative', cursive;
+}
+.contador-sep { font-size: 1.2rem; color: var(--morado); font-weight: bold; align-self: flex-start; margin-top: 2px; }
+
+.fecha-texto {
+    font-size: 0.65rem; letter-spacing: 2px;
+    color: var(--lila); font-family: 'Cinzel Decorative', cursive;
+}
+.fecha-destello { animation: fechaDestello 2s ease-in-out infinite alternate; }
+@keyframes fechaDestello {
+    from { text-shadow: 0 0 6px var(--morado-glow); }
+    to   { text-shadow: 0 0 16px var(--morado), 0 0 30px rgba(192,132,252,0.8), 0 0 50px rgba(150,0,255,0.4); }
+}
+
+/* ─────────────────────────────────────────────
+   HORA BADGE
+   ─────────────────────────────────────────────*/
+.hora-badge {
+    font-family: 'Cinzel Decorative', cursive; font-size: 0.75rem;
+    color: var(--lila); letter-spacing: 2px;
+    background: rgba(192,132,252,0.12);
+    border: 1px solid rgba(192,132,252,0.45);
+    padding: 5px 16px;
+    animation: horaBadgePulso 2.5s ease-in-out infinite alternate;
+}
+@keyframes horaBadgePulso {
+    from { border-color: rgba(192,132,252,0.3); box-shadow: none; }
+    to   { border-color: var(--morado); box-shadow: 0 0 14px var(--morado-glow); }
+}
+
+/* ─────────────────────────────────────────────
+   VESTIMENTA
+   ─────────────────────────────────────────────*/
+.hada-icono-float {
+    font-size: 2.5rem;
+    animation: flotarHada 3s ease-in-out infinite;
+}
+@keyframes flotarHada { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
+
+.vestimenta-badge-fantasia {
+    font-family: 'Cinzel Decorative', cursive; font-size: 0.9rem;
+    letter-spacing: 4px; color: #fff;
+    background: linear-gradient(135deg, var(--morado-oscuro), var(--morado), var(--morado-oscuro));
+    padding: 6px 22px;
+    box-shadow: 0 0 20px var(--morado-glow);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+}
+
+.vestimenta-sugerencia-texto {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 0.84rem; line-height: 1.7;
+    color: var(--blanco-suave);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+}
+
+/* ─────────────────────────────────────────────
+   LLUVIA SOBRES
+   ─────────────────────────────────────────────*/
+.lluvia-texto { font-size: 1rem; color: var(--morado); font-style: italic; }
+.lluvia-anim {
+    animation: lluviaBrello 2s ease-in-out infinite alternate;
+}
+@keyframes lluviaBrello {
+    from { text-shadow: 0 0 6px var(--morado-glow); transform: scale(1); }
+    to   { text-shadow: 0 0 18px var(--morado), 0 0 35px rgba(150,0,255,0.5); transform: scale(1.04); }
+}
+
+/* ─────────────────────────────────────────────
+   BOTONES
+   ─────────────────────────────────────────────*/
+.btn-fantasia, .btn-fantasia-oro {
+    font-family: 'Cinzel Decorative', cursive; font-size: 0.7rem;
+    letter-spacing: 1.5px; font-weight: 700;
+    padding: 11px 10px; width: 90%; cursor: pointer;
+    position: relative; overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid var(--morado);
+    background: rgba(120,0,200,0.25);
+    color: var(--lila);
+    box-shadow: 0 0 14px rgba(120,0,200,0.25);
+}
+.btn-fantasia:hover {
+    background: rgba(192,132,252,0.22);
+    box-shadow: 0 0 22px var(--morado-glow);
+}
+.btn-fantasia-oro {
+    background: linear-gradient(135deg, var(--morado-oscuro), #4c1d95, var(--morado-oscuro));
+    color: #fff; border-color: var(--lila);
+    box-shadow: 0 0 20px var(--morado-glow);
+}
+.btn-fantasia-oro:hover { box-shadow: 0 0 30px var(--morado), 0 0 50px rgba(100,0,200,0.4); }
+
+/* Shimmer */
+.btn-shimmer::after {
+    content: ''; position: absolute;
+    top: 0; left: -100%; width: 60%; height: 100%;
+    background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+    animation: shimmerPaso 3s ease-in-out infinite;
+}
+@keyframes shimmerPaso { 0%{left:-100%;} 50%,100%{left:160%;} }
+
+/* ─────────────────────────────────────────────
+   ANIMACIONES COMPARTIDAS
+   ─────────────────────────────────────────────*/
+@keyframes brilloCorna {
+    from { text-shadow: 0 0 6px rgba(192,132,252,0.5); }
+    to   { text-shadow: 0 0 16px var(--morado), 0 0 30px rgba(150,0,255,0.6); }
+}
+@keyframes iconoRing {
+    0%,100%{transform:scale(1);} 50%{transform:scale(1.1);}
+}
+.titulo-pulso { animation: tituloPulso 3s ease-in-out infinite alternate; }
+@keyframes tituloPulso {
+    from { text-shadow: 0 0 10px var(--morado-glow); }
+    to   { text-shadow: 0 0 22px var(--morado), 0 0 40px rgba(150,0,255,0.6); }
+}
+
+/* ─────────────────────────────────────────────
+   PORTADA EXPANDIDA S1
+   ─────────────────────────────────────────────*/
+.portada-wrapper {
+    position: relative; z-index: 3;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 9px;
+    text-align: center;
+    width: 91%; max-width: 330px;
+    padding: 22px 18px;
+    background: var(--negro-magic);
+    border: 1px solid rgba(192,132,252,0.38);
+    box-shadow: 0 0 0 1px rgba(192,132,252,0.1), 0 0 45px rgba(120,0,200,0.35), inset 0 0 50px rgba(100,0,180,0.09);
+    backdrop-filter: blur(7px);
+}
+
+/* Bandas superior e inferior */
+.portada-banda-top, .portada-banda-bot {
+    display: flex; align-items: center; gap: 8px; width: 100%;
+}
+.pb-linea {
+    flex: 1; height: 1px;
+    background: linear-gradient(to right, transparent, var(--morado), transparent);
+}
+.pb-texto {
+    font-family: 'Cinzel Decorative', cursive; font-size: 0.45rem;
+    letter-spacing: 2px; color: var(--morado); white-space: nowrap;
+    text-shadow: 0 0 10px var(--morado-glow);
+}
+
+/* Luna grande */
+.portada-luna-grande {
+    font-size: 1.8rem; letter-spacing: 8px;
+    color: var(--lila);
+    text-shadow: 0 0 20px var(--morado-glow), 0 0 40px rgba(192,132,252,0.3);
+    animation: lunaFlote 4s ease-in-out infinite;
+}
+
+/* Texto "Te invita" */
+.portada-invita {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 0.82rem; color: var(--lila); letter-spacing: 1px;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+}
+
+/* Bloque nombre */
+.portada-nombre-bloque {
+    width: 100%;
+    border-top: 1px solid rgba(192,132,252,0.3);
+    border-bottom: 1px solid rgba(192,132,252,0.3);
+    padding: 10px 0;
+}
+.portada-mis-xv {
+    font-family: 'Great Vibes', cursive; font-size: 2rem;
+    color: var(--lila); margin: 0 0 4px;
+    text-shadow: 0 0 20px var(--morado-glow), 0 2px 5px rgba(0,0,0,0.9);
+}
+.portada-nombre {
+    font-family: 'Cinzel Decorative', cursive; font-size: 0.82rem;
+    letter-spacing: 2px; color: #fff; line-height: 2;
+    text-shadow: 0 0 15px var(--morado-glow), 0 1px 4px rgba(0,0,0,0.9);
+    margin: 0;
+}
+
+/* Mariposas row */
+.portada-mariposas-row {
+    display: flex; align-items: center; gap: 6px; width: 90%;
+}
+.pb-linea-corta {
+    flex: 1; height: 1px;
+    background: linear-gradient(to right, transparent, var(--morado));
+}
+.portada-mariposas-row span:last-child.pb-linea-corta {
+    background: linear-gradient(to left, transparent, var(--morado));
+}
+.pm-icon {
+    font-size: 0.95rem;
+    animation: mariposasPulso 3s ease-in-out infinite alternate;
+}
+
+/* Cita */
+.portada-cita {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 0.8rem; line-height: 1.7;
+    color: #d8b4fe;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+    border: 1px solid rgba(192,132,252,0.35);
+    padding: 10px 14px; text-align: center;
+    width: 90%;
+}
+
+/* Fecha destacada */
+.portada-fecha-bloque {
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(100,0,200,0.2);
+    border: 1px solid rgba(192,132,252,0.35);
+    padding: 8px 20px; width: 90%;
+    justify-content: center;
+    box-shadow: 0 0 15px rgba(120,0,200,0.3);
+}
+.portada-fecha-num {
+    font-family: 'Cinzel Decorative', cursive; font-size: 2.2rem;
+    color: var(--morado); line-height: 1;
+    text-shadow: 0 0 20px var(--morado-glow);
+    animation: tituloPulso 3s ease-in-out infinite alternate;
+}
+.portada-fecha-texto {
+    display: flex; flex-direction: column; text-align: left;
+    font-family: 'Cinzel Decorative', cursive; font-size: 0.6rem;
+    letter-spacing: 2px; color: var(--lila); gap: 2px;
+    text-shadow: 0 0 8px var(--morado-glow);
+}
+
+/* ─────────────────────────────────────────────
+   FRASES EN CARDS (fc-frase)
+   ─────────────────────────────────────────────*/
+.fc-frase {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 0.82rem; line-height: 1.75;
+    color: #d8b4fe;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+    border: 1px solid rgba(192,132,252,0.35);
+    padding: 10px 14px; text-align: center;
+    width: 90%;
+}
+
+/* Nota pequeña */
+.fc-nota {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 0.72rem; color: #a78bfa;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+}
+
+/* Sublabel */
+.fc-sublabel {
+    font-size: 0.72rem; color: #a78bfa;
+    font-family: 'Playfair Display', serif; font-style: italic;
+    margin-top: -6px;
+}
+
+/* Personas bloque */
+.fc-personas-bloque {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.fc-icono-persona { font-size: 1.1rem; }
+
+/* Detalles row (fecha + hora) */
+.fc-detalles-row {
+    display: flex; align-items: center; justify-content: center;
+    gap: 14px; width: 90%;
+    background: rgba(100,0,200,0.15);
+    border: 1px solid rgba(192,132,252,0.25);
+    padding: 8px 12px;
+}
+.fc-detalle-item {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+}
+.fc-detalle-icon { font-size: 1.1rem; }
+.fc-detalle-txt {
+    font-family: 'Cinzel Decorative', cursive; font-size: 0.52rem;
+    letter-spacing: 1px; color: var(--lila); line-height: 1.5; text-align: center;
+    text-shadow: 0 0 8px var(--morado-glow);
+}
+.fc-detalle-sep { font-size: 1.4rem; color: var(--morado); opacity: 0.6; }
+
+/* Pills de colores */
+.colores-row {
+    display: flex; gap: 6px; justify-content: center; flex-wrap: wrap;
+}
+.color-pill {
+    font-family: 'Cinzel Decorative', cursive; font-size: 0.45rem;
+    letter-spacing: 1px; color: #fff;
+    padding: 4px 10px; border-radius: 20px;
+    box-shadow: 0 0 10px rgba(100,0,200,0.4);
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* Titulo del poema */
+.poema-titulo-row {
+    display: flex; align-items: center; gap: 8px;
+    justify-content: center; width: 100%; margin-bottom: 4px;
+}
+.poema-titulo-texto {
+    font-family: 'Great Vibes', cursive; font-size: 1.4rem;
+    color: var(--morado);
+    text-shadow: 0 0 14px var(--morado-glow);
+}
+.poema-luna { font-size: 1rem; color: var(--lila); }
+
+/* Firma del poema */
+.poema-firma {
+    font-family: 'Great Vibes', cursive; font-size: 1.2rem;
+    color: var(--morado); margin-top: 4px;
+    text-shadow: 0 0 12px var(--morado-glow);
 }
