@@ -714,3 +714,47 @@ body, html {
     color: var(--morado); margin-top: 4px;
     text-shadow: 0 0 12px var(--morado-glow);
 }
+
+/* ─────────────────────────────────────────────
+   OPTIMIZACIONES DE RENDIMIENTO MÓVIL
+   ─────────────────────────────────────────────*/
+
+/* Scroll suave acelerado por GPU */
+#invitacion-final {
+    -webkit-overflow-scrolling: touch;
+    will-change: scroll-position;
+}
+
+/* Cada sección es una capa independiente */
+.planilla {
+    contain: layout style;
+    will-change: opacity;
+}
+
+/* Canvas en su propia capa GPU — solo cuando está visible */
+.brillo-canvas {
+    will-change: contents;
+}
+
+/* Animaciones CSS solo con transform y opacity (GPU-friendly) */
+.anim-entrada {
+    will-change: transform, opacity;
+}
+
+/* Reduce shadowBlur en animaciones CSS — pesado en móvil */
+.deco-corona,
+.fc-footer-deco,
+.poema-ornamento-top,
+.poema-ornamento-bottom {
+    will-change: text-shadow;
+}
+
+/* Desactiva backdrop-filter en dispositivos lentos si es necesario */
+@media (max-width: 390px) {
+    .fantasia-card,
+    .portada-wrapper,
+    .poema-wrapper {
+        backdrop-filter: none;
+        background: rgba(10, 0, 25, 0.88);
+    }
+}
