@@ -159,7 +159,7 @@ function iniciarObservadorEntrada() {
 
 /* ── Contador regresivo ── */
 function actualizarContador() {
-    const diff = new Date("April 18, 2026 17:00:00") - new Date();
+    const diff = new Date("April 25, 2026 17:00:00") - new Date();
     const elDias = document.getElementById("c-dias");
     if (!elDias) return;
     if (diff <= 0) {
